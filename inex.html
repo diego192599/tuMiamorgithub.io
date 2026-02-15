@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi amor ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: cambiaColor 10s infinite;
+        }
+        
+        @keyframes cambiaColor {
+            0% { background: linear-gradient(135deg, #ffb6c1, #ff69b4); }
+            50% { background: linear-gradient(135deg, #e6e6fa, #9370db); }
+            100% { background: linear-gradient(135deg, #ffb6c1, #ff69b4); }
+        }
+        
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            color: #ff1493;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: latido 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .corazon {
+            font-size: 5rem;
+            margin: 1rem 0;
+            animation: flotar 2s ease-in-out infinite;
+        }
+        
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .mensaje {
+            font-size: 1.2rem;
+            color: #8b4513;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+        
+        button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s;
+            border: 2px solid white;
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        button:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+        
+        .contador {
+            font-size: 1.5rem;
+            color: #ff1493;
+            margin-top: 1rem;
+        }
+        
+        .flor {
+            font-size: 2rem;
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
+            animation: florSube 2s forwards;
+        }
+        
+        @keyframes florSube {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta">
+        <h1>💕 TE QUIERO MUCHO 💕</h1>
+        <div class="corazon" id="corazon">❤️</div>
+        
+        <div class="mensaje" id="mensaje">
+            Eres la persona más especial en mi vida 💝
+        </div>
+        
+        <button onclick="cambiarMensaje()">
+            💌 Mensaje especial 💌
+        </button>
+        
+        <button onclick="lloverFlores()">
+            🌸 Flores virtuales 🌸
+        </button>
+        
+        <button onclick="darBeso()">
+            💋 Dar un beso 💋
+        </button>
+        
+        <div class="contador" id="contadorBesos">
+            Besos: 0 💋
+        </div>
+    </div>
+
+    <script>
+        const mensajes = [
+            "Eres la razón de mi sonrisa 😊",
+            "Cada día a tu lado es especial ✨",
+            "Tu amor ilumina mi vida 🌟",
+            "Eres mi persona favorita 💑",
+            "Contigo todo es mejor 🌈",
+            "Te elijo hoy, mañana y siempre 💕",
+            "Mi lugar favorito es a tu lado 🏠",
+            "Eres mi pensamiento favorito 💭",
+            "Gracias por existir 🌹",
+            "Te quiero más que ayer, pero menos que mañana 📈",
+            "Eres lo mejor que me pasó en la vida 💖"
+        ];
+        
+        let contadorBesos = 0;
+        
+        function cambiarMensaje() {
+            const mensajeAleatorio = mensajes[Math.floor(Math.random() * mensajes.length)];
+            document.getElementById('mensaje').textContent = mensajeAleatorio;
+            
+            const corazon = document.getElementById('corazon');
+            corazon.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                corazon.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        function lloverFlores() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    crearFlor();
+                }, i * 100);
+            }
+        }
+        
+        function crearFlor() {
+            const flor = document.createElement('div');
+            const flores = ['🌸', '🌼', '🌺', '🌹', '💮', '🏵️'];
+            flor.textContent = flores[Math.floor(Math.random() * flores.length)];
+            flor.className = 'flor';
+            
+            flor.style.left = Math.random() * window.innerWidth + 'px';
+            flor.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(flor);
+            
+            setTimeout(() => {
+                flor.remove();
+            }, 2000);
+        }
+        
+        function darBeso() {
+            contadorBesos++;
+            document.getElementById('contadorBesos').textContent = `Besos: ${contadorBesos} 💋`;
+            
+            const beso = document.createElement('div');
+            beso.textContent = '💋';
+            beso.style.position = 'fixed';
+            beso.style.fontSize = '2rem';
+            beso.style.left = Math.random() * window.innerWidth + 'px';
+            beso.style.bottom = '0px';
+            beso.style.animation = 'florSube 2s forwards';
+            document.body.appendChild(beso);
+            
+            setTimeout(() => {
+                beso.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
